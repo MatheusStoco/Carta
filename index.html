@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Para Mariana</title>
-  <link rel="icon" href="icon.png" type="image/jpeg">
+  <link rel="icon" href="icon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
@@ -23,6 +23,7 @@
       justify-content: center;
       overflow: hidden;
       padding: 20px;
+      position: relative;
     }
 
     .foto {
@@ -31,7 +32,7 @@
       border-radius: 20px;
       opacity: 0;
       transition: all 1s ease-in-out;
-      z-index: 0;
+      z-index: 1;
     }
 
     .foto1 {
@@ -92,7 +93,7 @@
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
-      z-index: 2;
+      z-index: 3;
       margin-top: 20px;
     }
 
@@ -135,7 +136,30 @@
       }
 
       .foto {
-        display: none;
+        opacity: 0;
+        width: 200px;
+        transition: all 1s ease-in-out;
+      }
+
+      .foto1 {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-5deg);
+        z-index: 1;
+      }
+
+      .foto2 {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%) rotate(5deg);
+        z-index: 1;
+      }
+
+      .foto1.subir,
+      .foto2.subir {
+        opacity: 1;
       }
     }
 
