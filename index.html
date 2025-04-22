@@ -4,204 +4,260 @@
   <meta charset="UTF-8">
   <title>Para Mariana</title>
   <link rel="icon" href="icon.png" type="image/png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     body {
+      margin: 0;
+      padding: 0;
       background: url('bg.jpeg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      position: relative;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      overflow: hidden;
-      padding: 20px;
-      position: relative;
-    }
-
-    .foto {
-      position: absolute;
-      width: 400px;
-      border-radius: 20px;
-      opacity: 0;
-      transition: all 1s ease-in-out;
-      z-index: 1;
-    }
-
-    .foto1 {
-      left: -450px;
-      bottom: -200px;
-      transform: rotate(-10deg);
-    }
-
-    .foto2 {
-      right: -450px;
-      bottom: -200px;
-      transform: rotate(10deg);
-    }
-
-    .foto1.subir {
-      left: 50px;
-      bottom: 150px;
-      opacity: 1;
-    }
-
-    .foto2.subir {
-      right: 50px;
-      bottom: 150px;
-      opacity: 1;
-    }
-
-    .conteudo {
-      text-align: center;
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      max-width: 600px;
-      width: 100%;
-      display: none;
+      align-items: center;
       z-index: 2;
-    }
-
-    .conteudo h1 {
-      font-size: 26px;
-      color: #d63384;
-      margin-bottom: 20px;
-    }
-
-    .conteudo p {
-      font-size: 18px;
-      color: #333;
-      line-height: 1.6;
     }
 
     .botao {
       background-color: #d63384;
       color: white;
+      border: none;
       padding: 15px 30px;
       font-size: 18px;
-      border: none;
       border-radius: 30px;
       cursor: pointer;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      position: relative;
       z-index: 3;
-      margin-top: 20px;
+      animation: pulse 1.5s infinite;
     }
 
-    .botao:hover {
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 1000px) {
-      .foto {
-        width: 250px;
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
       }
-
-      .foto1.subir {
-        left: 10px;
-        bottom: 100px;
-      }
-
-      .foto2.subir {
-        right: 10px;
-        bottom: 100px;
+      50% {
+        transform: scale(1.1);
       }
     }
 
-    @media (max-width: 768px) {
-      .conteudo {
-        padding: 30px 20px;
-      }
+    .carta {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      display: none;
+      z-index: 2;
+      animation: aparecer 1s ease-in-out;
+      position: relative;
+    }
 
-      .conteudo h1 {
-        font-size: 22px;
-      }
+    .carta h1 {
+      font-size: 24px;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
 
-      .conteudo p {
-        font-size: 16px;
-      }
+    .carta p {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.5;
+    }
 
-      .botao {
-        font-size: 16px;
-        padding: 12px 24px;
-      }
-
-      .foto {
+    @keyframes aparecer {
+      from {
         opacity: 0;
-        width: 200px;
-        transition: all 1s ease-in-out;
+        transform: translateY(20px);
       }
-
-      .foto1 {
-        position: absolute;
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%) rotate(-5deg);
-        z-index: 1;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      .foto2 {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%) rotate(5deg);
-        z-index: 1;
-      }
+    .foto {
+      position: absolute;
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      z-index: 1;
+    }
 
-      .foto1.subir,
-      .foto2.subir {
+    .foto1 {
+      top: 60%;
+      left: -200px;
+      transform: rotate(-20deg);
+    }
+
+    .foto2 {
+      top: 60%;
+      right: -200px;
+      transform: rotate(20deg);
+    }
+
+    @keyframes subir-diagonal-esquerda {
+      to {
+        left: 10px;
+        top: 50%;
         opacity: 1;
       }
     }
 
-    @media (max-width: 480px) {
-      .conteudo p {
-        font-size: 15px;
+    @keyframes subir-diagonal-direita {
+      to {
+        right: 10px;
+        top: 50%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes flutuar {
+      0% { transform: translateY(0) rotate(-10deg); }
+      100% { transform: translateY(-10px) rotate(-8deg); }
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: subirCoracao 5s linear infinite;
+      opacity: 0.6;
+      z-index: 0;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes subirCoracao {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .foto1 {
+        top: 20%;
+        left: 0;
+        width: 150px;
       }
 
-      .conteudo h1 {
+      .foto2 {
+        bottom: 5%;
+        right: 0;
+        top: auto;
+        width: 150px;
+      }
+
+      .carta {
+        padding: 20px;
+        font-size: 14px;
+        max-width: 90%;
+      }
+
+      .carta h1 {
         font-size: 20px;
       }
 
-      .botao {
-        font-size: 15px;
-        padding: 10px 20px;
+      .carta p {
+        font-size: 14px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Música -->
+  <audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <!-- Fotos escondidas -->
   <img src="foto1.jpg" class="foto foto1" id="foto1">
   <img src="foto2.jpg" class="foto foto2" id="foto2">
 
-  <div class="conteudo" id="carta">
-    <h1>fubanguinha 💖</h1>
-    <p>
-      Então Mariana, não sou muito bom com palavras, mas fiz isso pra expressar o quão especial você é pra mim.<br><br>
-      Nesse momento você está me explicando sobre o cérebro, e o que você estava estudando para a semana de provas, como eu amo te ouvir falando, poderia ficar por horas ouvindo, como eu amo quando ativa esse modo faladeira ksks.<br><br>
-      Estou muito feliz com os avanços que estamos tendo, e oro pra que a gente consiga cada vez mais nos edificarmos juntos, cada dia mais próximos do Pai!<br><br>
-      Obrigado por tudo, cada momento ao seu lado é incrível.
-    </p>
+  <div class="container">
+    <button class="botao" onclick="abrirCarta()">clique aqui para abrir 💌</button>
+    <div class="carta" id="carta">
+      <h1>fubanguinha 💖</h1>
+      <p>
+        Então Mariana, não sou muito bom com palavras, mas fiz isso pra expressar o quão especial você é pra mim<br><br>
+        Nesse momento você está me explicando sobre o cérebro, e o que você estava estudando para a semana de provas, como eu amo te ouvir falando, poderia ficar por horas ouvindo, como eu amo quando ativa esse modo faladeira ksks<br><br>
+        Estou muito feliz com os avanços que estamos tendo, e oro pra que a gente consiga cada vez mais nos edificarmos juntos, cada dia mais próximos do Pai!<br><br>
+        Obrigado por tudo, cada momento ao seu lado é incrível.
+      </p>
+    </div>
   </div>
 
-  <button class="botao" id="botao" onclick="abrirCarta()">clique aqui para abrir 💌</button>
-
+  <!-- Scripts -->
   <script>
     function abrirCarta() {
-      document.getElementById('botao').style.display = 'none';
+      // Esconder botão e mostrar carta
+      document.querySelector('.botao').style.display = 'none';
       document.getElementById('carta').style.display = 'block';
-      document.getElementById('foto1').classList.add('subir');
-      document.getElementById('foto2').classList.add('subir');
+
+      // Tocar música
+      const musica = document.getElementById('musica');
+      musica.play();
+
+      // Mostrar e animar fotos
+      const foto1 = document.getElementById('foto1');
+      const foto2 = document.getElementById('foto2');
+
+      foto1.style.animation = 'subir-diagonal-esquerda 1.5s ease-out forwards, flutuar 3s ease-in-out infinite alternate';
+      foto2.style.animation = 'subir-diagonal-direita 1.5s ease-out forwards, flutuar 3s ease-in-out infinite alternate';
+
+      // Iniciar corações
+      setInterval(() => {
+        const coracao = document.createElement("div");
+        coracao.classList.add("heart");
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.animationDuration = (3 + Math.random() * 2) + "s";
+        document.body.appendChild(coracao);
+
+        setTimeout(() => {
+          coracao.remove();
+        }, 5000);
+      }, 300);
     }
   </script>
 
