@@ -2,30 +2,33 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para Mariana</title>
   <link rel="icon" href="icon.png" type="image/png">
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
-      padding: 0;
       background: url('bg.jpeg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
     }
 
     .container {
       text-align: center;
-      position: relative;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 20px;
       z-index: 2;
     }
 
@@ -34,13 +37,13 @@
       color: white;
       border: none;
       padding: 15px 30px;
-      font-size: 18px;
+      font-size: clamp(16px, 4vw, 18px);
       border-radius: 30px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      position: relative;
       z-index: 3;
       animation: pulse 1.5s infinite;
+      touch-action: manipulation;
     }
 
     @keyframes pulse {
@@ -54,28 +57,27 @@
 
     .carta {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 30px;
+      padding: clamp(20px, 5vw, 30px);
       border-radius: 20px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      max-width: 380px;
+      max-width: 500px;
       width: 90%;
       text-align: center;
       display: none;
       z-index: 2;
       animation: aparecer 1s ease-in-out;
-      position: relative;
     }
 
     .carta h1 {
-      font-size: 24px;
+      font-size: clamp(20px, 5vw, 24px);
       color: #d63384;
       margin-bottom: 20px;
     }
 
     .carta p {
-      font-size: 16px;
+      font-size: clamp(14px, 3.5vw, 16px);
       color: #333;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     @keyframes aparecer {
@@ -91,37 +93,37 @@
 
     .foto {
       position: absolute;
-      width: 200px;
-      border-radius: 20px;
+      width: clamp(120px, 30vw, 180px);
+      border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
       opacity: 0;
       z-index: 1;
     }
 
     .foto1 {
-      top: 60%;
-      left: -200px;
-      transform: rotate(-20deg);
+      top: 10%;
+      left: 5%;
+      transform: rotate(-10deg);
     }
 
     .foto2 {
-      top: 60%;
-      right: -200px;
-      transform: rotate(20deg);
+      top: 10%;
+      right: 5%;
+      transform: rotate(10deg);
     }
 
     @keyframes subir-diagonal-esquerda {
       to {
-        left: 10px;
-        top: 50%;
+        left: 5%;
+        top: 15%;
         opacity: 1;
       }
     }
 
     @keyframes subir-diagonal-direita {
       to {
-        right: 10px;
-        top: 50%;
+        right: 5%;
+        top: 15%;
         opacity: 1;
       }
     }
@@ -173,45 +175,91 @@
       }
     }
 
-    @media (max-width: 600px) {
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .botao {
+        padding: 12px 25px;
+      }
+
+      .foto {
+        width: clamp(100px, 25vw, 140px);
+      }
+
       .foto1 {
-        top: 20%;
-        left: 0;
-        width: 150px;
+        top: 5%;
+        left: 2%;
       }
 
       .foto2 {
-        bottom: 5%;
-        right: 0;
-        top: auto;
-        width: 150px;
+        top: 5%;
+        right: 2%;
       }
 
+      @keyframes subir-diagonal-esquerda {
+        to {
+          left: 2%;
+          top: 10%;
+          opacity: 1;
+        }
+      }
+
+      @keyframes subir-diagonal-direita {
+        to {
+          right: 2%;
+          top: 10%;
+          opacity: 1;
+        }
+      }
+    }
+
+    @media (max-width: 480px) {
       .carta {
-        padding: 20px;
-        font-size: 14px;
-        max-width: 90%;
+        padding: 15px;
+        max-width: 95%;
       }
 
-      .carta h1 {
-        font-size: 20px;
+      .foto {
+        width: clamp(80px, 20vw, 100px);
       }
 
-      .carta p {
-        font-size: 14px;
+      .foto1 {
+        top: 2%;
+        left: 5%;
+      }
+
+      .foto2 {
+        top: 2%;
+        right: 5%;
+      }
+
+      @keyframes subir-diagonal-esquerda {
+        to {
+          left: 5%;
+          top: 5%;
+          opacity: 1;
+        }
+      }
+
+      @keyframes subir-diagonal-direita {
+        to {
+          right: 5%;
+          top: 5%;
+          opacity: 1;
+        }
       }
     }
   </style>
 </head>
 <body>
-
-  <!-- Música -->
   <audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio.
   </audio>
 
-  <!-- Fotos escondidas -->
   <img src="foto1.jpg" class="foto foto1" id="foto1">
   <img src="foto2.jpg" class="foto foto2" id="foto2">
 
@@ -228,25 +276,20 @@
     </div>
   </div>
 
-  <!-- Scripts -->
   <script>
     function abrirCarta() {
-      // Esconder botão e mostrar carta
       document.querySelector('.botao').style.display = 'none';
       document.getElementById('carta').style.display = 'block';
 
-      // Tocar música
       const musica = document.getElementById('musica');
-      musica.play();
+      musica.play().catch((e) => console.log("Erro ao tocar música:", e));
 
-      // Mostrar e animar fotos
       const foto1 = document.getElementById('foto1');
       const foto2 = document.getElementById('foto2');
 
       foto1.style.animation = 'subir-diagonal-esquerda 1.5s ease-out forwards, flutuar 3s ease-in-out infinite alternate';
       foto2.style.animation = 'subir-diagonal-direita 1.5s ease-out forwards, flutuar 3s ease-in-out infinite alternate';
 
-      // Iniciar corações
       setInterval(() => {
         const coracao = document.createElement("div");
         coracao.classList.add("heart");
@@ -260,6 +303,5 @@
       }, 300);
     }
   </script>
-
 </body>
 </html>
