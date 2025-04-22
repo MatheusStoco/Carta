@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Para Mariana</title>
-  <link rel="icon" href="icon.png" type="image/jpeg">
+  <link rel="icon" href="icon.jpeg" type="image/jpeg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
       margin: 0;
@@ -15,12 +16,13 @@
       background: url('bg.jpeg') no-repeat center center fixed;
       background-size: cover;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      position: relative;
+      justify-content: center;
       overflow: hidden;
+      padding: 20px;
     }
 
     .foto {
@@ -58,13 +60,26 @@
 
     .conteudo {
       text-align: center;
-      z-index: 2;
       background-color: rgba(255, 255, 255, 0.9);
       padding: 40px;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      max-width: 500px;
+      max-width: 600px;
+      width: 100%;
       display: none;
+      z-index: 2;
+    }
+
+    .conteudo h1 {
+      font-size: 26px;
+      color: #d63384;
+      margin-bottom: 20px;
+    }
+
+    .conteudo p {
+      font-size: 18px;
+      color: #333;
+      line-height: 1.6;
     }
 
     .botao {
@@ -78,22 +93,11 @@
       box-shadow: 0 5px 10px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
       z-index: 2;
+      margin-top: 20px;
     }
 
     .botao:hover {
       transform: scale(1.05);
-    }
-
-    .conteudo h1 {
-      font-size: 26px;
-      color: #d63384;
-      margin-bottom: 20px;
-    }
-
-    .conteudo p {
-      font-size: 18px;
-      color: #333;
-      line-height: 1.6;
     }
 
     @media (max-width: 1000px) {
@@ -112,9 +116,41 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .conteudo {
+        padding: 30px 20px;
+      }
+
+      .conteudo h1 {
+        font-size: 22px;
+      }
+
+      .conteudo p {
+        font-size: 16px;
+      }
+
+      .botao {
+        font-size: 16px;
+        padding: 12px 24px;
+      }
+
       .foto {
         display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .conteudo p {
+        font-size: 15px;
+      }
+
+      .conteudo h1 {
+        font-size: 20px;
+      }
+
+      .botao {
+        font-size: 15px;
+        padding: 10px 20px;
       }
     }
   </style>
